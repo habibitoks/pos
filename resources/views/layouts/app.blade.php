@@ -36,7 +36,7 @@
                     <a class="nav-link font-weight-bolder" href="{{url('transcation')}}">Point Of Sales Laravel                          
                         </a>
                     </li>
-                      @if ($useraccess ?? false && $useraccess === 1)
+                      @if (($useraccess ?? false) && ((int) $useraccess === 1 || (int) $useraccess === 2))
                         <li class="nav-item dropdown">
                           <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
                               aria-haspopup="true" aria-expanded="false">Product</a>
@@ -47,15 +47,18 @@
                         </li>
                       @endif
 
-                    <li class="nav-item">
-                      <a class="nav-link" href="{{url('/transcation/history')}}">History Transcation</a>
-                    </li>
+                      @if (($useraccess ?? false) && (int) $useraccess === 2)
+                        <li class="nav-item">
+                          <a class="nav-link" href="{{url('/transcation/history')}}">History Transaction</a>
+                        </li>
+                      @endif
                     
-                      @if ($useraccess ?? false && $useraccess === 1)
+                      @if (($useraccess ?? false) && ((int) $useraccess === 1 || (int) $useraccess === 2))
                         <li class="nav-item">
                           <a class="nav-link" href="{{url('/admin/listuser')}}">Daftar User</a>
                         </li>
                       @endif
+
                 </ul>
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
                     data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"

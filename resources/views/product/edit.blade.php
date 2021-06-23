@@ -41,6 +41,23 @@
                                         value="{{ old('price' , $product->price) }}">
                                     @include('layouts.error', ['name' => 'price'])
                                 </div>
+
+                                @if (($user->user_akses ?? false) && (int) $user->user_akses === 2)
+                                <div class="form-group">
+                                    <label>Status</label><br />
+                                    <select class="form-select" name="status">
+                                        <option value="{{ old('status' , $product->status) }}" selected>{{ $oldStatusProduct->name }}</option>
+                                        @foreach ($StatusProducts as $StatusProduct)
+                                            <option value="{{ $StatusProduct->id }}">{{ $StatusProduct->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    @include('layouts.error', ['name' => 'status'])
+                                </div>
+                                @else 
+                                <input type="hidden" name="status"
+                                        value="{{ old('status' , $draft->id) }}">
+                                @endif
+
                                 <div class="form-group">
                                     <label>Gambar Hero</label>
                                     <div>

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Product;
 use App\HistoryProduct;
 use App\ProductTranscation;
+use App\StatusProduct;
 //sorry kalau ada typo dalam penamaan dalam bahasa inggris 
 use App\Transcation;
 use Auth;
@@ -22,10 +23,14 @@ class TransactionController extends Controller
 {
     public function index(){    
              
+
+        $Published = StatusProduct::firstWhere('name', "Published");
+
         //product
         $products = Product::when(request('search'), function($query){
                         return $query->where('name','like','%'.request('search').'%');
                     })
+                    ->where('status', $Published->id)
                     ->orderBy('created_at','desc')
                     ->paginate(12);
 
@@ -90,6 +95,8 @@ class TransactionController extends Controller
         //bilang kalau ini package bisa store datanya di database 
 
         $user = User::find(Auth::id());
+
+    
         return view('pos.index', compact('products','cart_data','data_total', 'user'));
     }
 

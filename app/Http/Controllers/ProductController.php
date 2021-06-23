@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 //© 2020 Copyright: Tahu Coding
 use File;
 use App\Product;
+use App\StatusProduct;
 use App\HistoryProduct;
 use Illuminate\Http\Request;
 use App\User;
@@ -16,14 +17,19 @@ use Intervention\Image\Facades\Image;
 class ProductController extends Controller
 {
     public function index(){
-       
         $products = Product::when(request('search'), function($query){
                         return $query->where('name','like','%'.request('search').'%');
                     })
                     ->orderBy('created_at','desc')
                     ->paginate(8);
+        $statusProduct = [];
+
+        foreach ($products as $key=>$product) {
+            array_push($statusProduct,StatusProduct::find($product->status));
+        }
+
         $user = User::find(Auth::id());
-        return view('product.index', compact('products', 'user'));
+        return view('product.index', compact('products', 'user', 'statusProduct'));
     }
 
     public function create(){
@@ -67,6 +73,7 @@ class ProductController extends Controller
                     $product = [
                         'name' => $request->name,
                         'price' => $request->price,     
+                        'status' => $request->status,    
                         'qty' => $qty,          
                         'image' => 'uploads/images/'.$new_gambar,
                         'description' => $request->description,
@@ -76,6 +83,7 @@ class ProductController extends Controller
                     $product = [
                         'name' => $request->name,
                         'price' => $request->price,     
+                        'status' => $request->status,  
                         'qty' => $qty,                         
                         'description' => $request->description,
                     ];
@@ -86,6 +94,7 @@ class ProductController extends Controller
                         'product_id' => $product_id->id,
                         'user_id' => Auth::id(),
                         'qty' => $request->qty,
+                        'status' => $request->status,
                         'qtyChange' => $request->addQty,
                         'tipe' => 'change product qty from admin'
                     ]);
@@ -141,31 +150,30 @@ class ProductController extends Controller
     }
 
     public function edit($id){
-        
         $product = Product::find($id);
+        $StatusProducts = StatusProduct::all();
         $history = HistoryProduct::where('product_id',$id)->orderBy('created_at','desc')->get();
-        // print($history);
+        $oldStatusProduct = StatusProduct::find($product->status);
+        $draft = StatusProduct::firstWhere('name', "Draft");
         $user = User::find(Auth::id());
-        return view('product.edit',compact('product','history', 'user'));
+        return view('product.edit',compact('product','history', 'user', 'StatusProducts', 'oldStatusProduct', 'draft'));
     }
 
     public function destroy(Request $request,$id){
         DB::beginTransaction();
 
         try{
-        $product = Product::find($id);
-        $product->delete();
-        File::delete(public_path($product->image));       
+            $product = Product::find($id);
+            $product->delete();
+            File::delete(public_path($product->image));       
 
-        DB::commit();
-        return redirect()->route('products.index')->with('success','Product berhasil dihapus');                             
+            DB::commit();
+            return redirect()->route('products.index')->with('success','Product berhasil dihapus');                             
         }
         catch(\Exeception $e){
             DB::rollback();      
             return redirect()->route('products.index')->with('error',$e);      
         }  
-
-        
     }
 
     //© 2020 Copyright: Tahu Coding
