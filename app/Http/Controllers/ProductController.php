@@ -94,7 +94,6 @@ class ProductController extends Controller
                         'product_id' => $product_id->id,
                         'user_id' => Auth::id(),
                         'qty' => $request->qty,
-                        'status' => $request->status,
                         'qtyChange' => $request->addQty,
                         'tipe' => 'change product qty from admin'
                     ]);
@@ -119,7 +118,8 @@ class ProductController extends Controller
                 $product = Product::create([
                         'name' => $request->name,
                         'price' => $request->price,     
-                        'qty' => $request->qty,          
+                        'qty' => $request->qty,    
+                        'status' => $request->status,        
                         'image' => 'uploads/images/'.$new_gambar,
                         'description' => $request->description,
                         'user_id' => Auth::id()
