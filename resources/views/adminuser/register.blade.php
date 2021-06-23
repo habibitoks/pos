@@ -66,9 +66,12 @@
 
                             <div class="col-md-6">
                                 <select name="akses" id="akses" class="form-control @error('name') is-invalid @enderror">
+                                    @if(($user->user_akses ?? false) && (int) $user->user_akses === 2)
+                                    <option value="2">Owner</option>
+                                    @endif
                                     <option value="1">Admin</option>
                                     <option value="0">Kasir</option>
-                                  </select>
+                                </select>
                                 {{-- <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus> --}}
 
                                 @error('name')
