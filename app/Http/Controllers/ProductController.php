@@ -34,7 +34,9 @@ class ProductController extends Controller
 
     public function create(){
         $user = User::find(Auth::id());
-        return view('product.create', compact('user'));
+        $StatusProducts = StatusProduct::all();
+        $draft = StatusProduct::firstWhere('name', "Draft");
+        return view('product.create', compact('user', 'StatusProducts', 'draft'));
     }
 
     public function store(Request $request){       
