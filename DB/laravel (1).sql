@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 22, 2021 at 04:21 PM
--- Server version: 10.4.18-MariaDB
--- PHP Version: 7.3.27
+-- Waktu pembuatan: 23 Jun 2021 pada 16.12
+-- Versi server: 10.4.19-MariaDB
+-- Versi PHP: 7.3.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `laravel-pos-tahu-coding`
+-- Database: `laravel`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `failed_jobs`
+-- Struktur dari tabel `failed_jobs`
 --
 
 CREATE TABLE `failed_jobs` (
@@ -39,7 +39,7 @@ CREATE TABLE `failed_jobs` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `history_products`
+-- Struktur dari tabel `history_products`
 --
 
 CREATE TABLE `history_products` (
@@ -54,7 +54,7 @@ CREATE TABLE `history_products` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `history_products`
+-- Dumping data untuk tabel `history_products`
 --
 
 INSERT INTO `history_products` (`id`, `product_id`, `user_id`, `qty`, `qtyChange`, `tipe`, `created_at`, `updated_at`) VALUES
@@ -69,7 +69,7 @@ INSERT INTO `history_products` (`id`, `product_id`, `user_id`, `qty`, `qtyChange
 -- --------------------------------------------------------
 
 --
--- Table structure for table `migrations`
+-- Struktur dari tabel `migrations`
 --
 
 CREATE TABLE `migrations` (
@@ -79,7 +79,7 @@ CREATE TABLE `migrations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `migrations`
+-- Dumping data untuk tabel `migrations`
 --
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
@@ -95,7 +95,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `model_has_permissions`
+-- Struktur dari tabel `model_has_permissions`
 --
 
 CREATE TABLE `model_has_permissions` (
@@ -107,7 +107,7 @@ CREATE TABLE `model_has_permissions` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `model_has_roles`
+-- Struktur dari tabel `model_has_roles`
 --
 
 CREATE TABLE `model_has_roles` (
@@ -119,7 +119,7 @@ CREATE TABLE `model_has_roles` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `password_resets`
+-- Struktur dari tabel `password_resets`
 --
 
 CREATE TABLE `password_resets` (
@@ -131,7 +131,7 @@ CREATE TABLE `password_resets` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `permissions`
+-- Struktur dari tabel `permissions`
 --
 
 CREATE TABLE `permissions` (
@@ -143,7 +143,7 @@ CREATE TABLE `permissions` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `permissions`
+-- Dumping data untuk tabel `permissions`
 --
 
 INSERT INTO `permissions` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
@@ -154,7 +154,7 @@ INSERT INTO `permissions` (`id`, `name`, `guard_name`, `created_at`, `updated_at
 -- --------------------------------------------------------
 
 --
--- Table structure for table `products`
+-- Struktur dari tabel `products`
 --
 
 CREATE TABLE `products` (
@@ -165,24 +165,25 @@ CREATE TABLE `products` (
   `qty` int(11) NOT NULL,
   `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `user_id` bigint(20) UNSIGNED NOT NULL,
+  `status` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `products`
+-- Dumping data untuk tabel `products`
 --
 
-INSERT INTO `products` (`id`, `name`, `price`, `image`, `qty`, `description`, `user_id`, `created_at`, `updated_at`) VALUES
-(1, 'G733QS-R938D6T-O', 60000000, 'uploads/images/1619673702h525.png', 8, 'GeForce RTX™ 3080 Laptop GPU\r\nAMD Ryzen™ 9 5000 Series\r\n17.3\"\r\n1TB M.2 NVMe™ PCIe® 3.0 x4 SSD x 2', 1, '2021-04-28 22:21:42', '2021-04-29 02:26:59'),
-(2, 'ROG Strix SCAR 17 G732LXS-I78SD6T', 39000000, 'uploads/images/1619675885h525 (1).png', 9, 'GeForce RTX™ 2080 SUPER\r\nWindows 10 Home\r\n10th Gen Intel® Core™ i7\r\n17.3\"\r\n1TB + 1TB M.2 NVMe™ PCIe® 3.0 SSD (RAID 0)', 1, '2021-04-28 22:58:05', '2021-04-29 02:26:59'),
-(3, 'safsf', 12, 'uploads/images/1619699711h525.png', 12, 'adaf', 3, '2021-04-29 05:35:11', '2021-04-29 05:35:11'),
-(4, 'ASUS ROG ZEPHYRUS M GU502GU 2019', 23000000, 'uploads/images/1622119732LAPTOP rog.jpg', 8, 'Kondisi\r\nPernah Dipakai\r\nMerek\r\nAsus\r\nOperating System\r\nWindows\r\nProcessor\r\nIntel i7\r\nMemory RAM\r\n16 GB\r\nPenyimpanan\r\n1 TB SSD\r\nUkuran Layar\r\n15\"\r\nResolusi\r\n1920x1080\r\nGraphic Card\r\nNvidia', 3, '2021-05-27 05:48:52', '2021-05-27 05:50:02');
+INSERT INTO `products` (`id`, `name`, `price`, `image`, `qty`, `description`, `user_id`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'G733QS-R938D6T-O', 60000000, 'uploads/images/1619673702h525.png', 8, 'GeForce RTX™ 3080 Laptop GPU\r\nAMD Ryzen™ 9 5000 Series\r\n17.3\"\r\n1TB M.2 NVMe™ PCIe® 3.0 x4 SSD x 2', 1, '4df5ab2ede3d9b27364f42d7726691ef', '2021-04-28 22:21:42', '2021-04-29 02:26:59'),
+(2, 'ROG Strix SCAR 17 G732LXS-I78SD6T', 39000000, 'uploads/images/1619675885h525 (1).png', 9, 'GeForce RTX™ 2080 SUPER\r\nWindows 10 Home\r\n10th Gen Intel® Core™ i7\r\n17.3\"\r\n1TB + 1TB M.2 NVMe™ PCIe® 3.0 SSD (RAID 0)', 1, '4df5ab2ede3d9b27364f42d7726691ef', '2021-04-28 22:58:05', '2021-04-29 02:26:59'),
+(3, 'safsf', 12, 'uploads/images/1619699711h525.png', 12, 'adaf', 3, '4df5ab2ede3d9b27364f42d7726691ef', '2021-04-29 05:35:11', '2021-04-29 05:35:11'),
+(4, 'ASUS ROG ZEPHYRUS M GU502GU 2019', 23000000, 'uploads/images/1622119732LAPTOP rog.jpg', 8, 'Kondisi\r\nPernah Dipakai\r\nMerek\r\nAsus\r\nOperating System\r\nWindows\r\nProcessor\r\nIntel i7\r\nMemory RAM\r\n16 GB\r\nPenyimpanan\r\n1 TB SSD\r\nUkuran Layar\r\n15\"\r\nResolusi\r\n1920x1080\r\nGraphic Card\r\nNvidia', 3, '4df5ab2ede3d9b27364f42d7726691ef', '2021-05-27 05:48:52', '2021-06-23 06:51:45');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `product_transation`
+-- Struktur dari tabel `product_transation`
 --
 
 CREATE TABLE `product_transation` (
@@ -195,7 +196,7 @@ CREATE TABLE `product_transation` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `product_transation`
+-- Dumping data untuk tabel `product_transation`
 --
 
 INSERT INTO `product_transation` (`id`, `product_id`, `invoices_number`, `qty`, `created_at`, `updated_at`) VALUES
@@ -206,7 +207,7 @@ INSERT INTO `product_transation` (`id`, `product_id`, `invoices_number`, `qty`, 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `roles`
+-- Struktur dari tabel `roles`
 --
 
 CREATE TABLE `roles` (
@@ -218,7 +219,7 @@ CREATE TABLE `roles` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `roles`
+-- Dumping data untuk tabel `roles`
 --
 
 INSERT INTO `roles` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
@@ -229,7 +230,7 @@ INSERT INTO `roles` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VAL
 -- --------------------------------------------------------
 
 --
--- Table structure for table `role_has_permissions`
+-- Struktur dari tabel `role_has_permissions`
 --
 
 CREATE TABLE `role_has_permissions` (
@@ -240,7 +241,26 @@ CREATE TABLE `role_has_permissions` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `transcations`
+-- Struktur dari tabel `status_product`
+--
+
+CREATE TABLE `status_product` (
+  `id` varchar(64) NOT NULL,
+  `name` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `status_product`
+--
+
+INSERT INTO `status_product` (`id`, `name`) VALUES
+('4df5ab2ede3d9b27364f42d7726691ef', 'Draft'),
+('d773fc2d8bdc3c7730779322cb904293', 'Published');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `transcations`
 --
 
 CREATE TABLE `transcations` (
@@ -253,7 +273,7 @@ CREATE TABLE `transcations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `transcations`
+-- Dumping data untuk tabel `transcations`
 --
 
 INSERT INTO `transcations` (`invoices_number`, `user_id`, `pay`, `total`, `created_at`, `updated_at`) VALUES
@@ -263,7 +283,7 @@ INSERT INTO `transcations` (`invoices_number`, `user_id`, `pay`, `total`, `creat
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Struktur dari tabel `users`
 --
 
 CREATE TABLE `users` (
@@ -271,7 +291,7 @@ CREATE TABLE `users` (
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
-  `user_akses` int(1) NOT NULL DEFAULT 0,
+  `user_akses` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -279,166 +299,173 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `users`
+-- Dumping data untuk tabel `users`
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `user_akses`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(15, 'habibi', 'habibi@admin.com', NULL, 1, '$2y$10$Gvp8IQkh9B8cjREvhQKSd.1hUuCopFdFlQGc2eHIVUQZNOuHk/aUm', NULL, '2021-06-17 04:51:29', '2021-06-17 04:51:29'),
-(16, 'hafid', 'hafid@kasir.com', NULL, 0, '$2y$10$cPArUmtVvpJnNklq/HGqZeUnY6vfl.EmjRxeNaUwd4LG9YcV4yvlq', NULL, '2021-06-17 04:52:37', '2021-06-17 04:52:37'),
-(17, 'ruchfi', 'ruchfi@kasir.com', NULL, 0, '$2y$10$mVKRsVGa/5xQkuj7IPntH.jDKDwQeB1yVHzFpJ48kAAxVC/HqZQ9u', NULL, '2021-06-17 05:32:14', '2021-06-17 05:32:14');
+(15, 'habibi', 'habibi@admin.com', NULL, '1', '$2y$10$Gvp8IQkh9B8cjREvhQKSd.1hUuCopFdFlQGc2eHIVUQZNOuHk/aUm', NULL, '2021-06-17 04:51:29', '2021-06-17 04:51:29'),
+(16, 'hafid', 'hafid@kasir.com', NULL, '0', '$2y$10$cPArUmtVvpJnNklq/HGqZeUnY6vfl.EmjRxeNaUwd4LG9YcV4yvlq', NULL, '2021-06-17 04:52:37', '2021-06-17 04:52:37'),
+(17, 'ruchfi', 'ruchfi@kasir.com', NULL, '0', '$2y$10$mVKRsVGa/5xQkuj7IPntH.jDKDwQeB1yVHzFpJ48kAAxVC/HqZQ9u', NULL, '2021-06-17 05:32:14', '2021-06-17 05:32:14'),
+(18, 'HafidCuy', 'Hafid@hikuga.com', NULL, '2', '$2y$10$QZbrT60IYFykS9UZh6jmz.h6tKvfETCeNnfaGU./MFKmxQhsmdWIy', NULL, '2021-06-23 04:48:16', '2021-06-23 04:48:16');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `failed_jobs`
+-- Indeks untuk tabel `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `history_products`
+-- Indeks untuk tabel `history_products`
 --
 ALTER TABLE `history_products`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `migrations`
+-- Indeks untuk tabel `migrations`
 --
 ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `model_has_permissions`
+-- Indeks untuk tabel `model_has_permissions`
 --
 ALTER TABLE `model_has_permissions`
   ADD PRIMARY KEY (`permission_id`,`model_id`,`model_type`),
   ADD KEY `model_has_permissions_model_id_model_type_index` (`model_id`,`model_type`);
 
 --
--- Indexes for table `model_has_roles`
+-- Indeks untuk tabel `model_has_roles`
 --
 ALTER TABLE `model_has_roles`
   ADD PRIMARY KEY (`role_id`,`model_id`,`model_type`),
   ADD KEY `model_has_roles_model_id_model_type_index` (`model_id`,`model_type`);
 
 --
--- Indexes for table `password_resets`
+-- Indeks untuk tabel `password_resets`
 --
 ALTER TABLE `password_resets`
   ADD KEY `password_resets_email_index` (`email`);
 
 --
--- Indexes for table `permissions`
+-- Indeks untuk tabel `permissions`
 --
 ALTER TABLE `permissions`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `permissions_name_guard_name_unique` (`name`,`guard_name`);
 
 --
--- Indexes for table `products`
+-- Indeks untuk tabel `products`
 --
 ALTER TABLE `products`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `product_transation`
+-- Indeks untuk tabel `product_transation`
 --
 ALTER TABLE `product_transation`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `roles`
+-- Indeks untuk tabel `roles`
 --
 ALTER TABLE `roles`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `roles_name_guard_name_unique` (`name`,`guard_name`);
 
 --
--- Indexes for table `role_has_permissions`
+-- Indeks untuk tabel `role_has_permissions`
 --
 ALTER TABLE `role_has_permissions`
   ADD PRIMARY KEY (`permission_id`,`role_id`),
   ADD KEY `role_has_permissions_role_id_foreign` (`role_id`);
 
 --
--- Indexes for table `users`
+-- Indeks untuk tabel `status_product`
+--
+ALTER TABLE `status_product`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `users_email_unique` (`email`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
--- AUTO_INCREMENT for table `failed_jobs`
+-- AUTO_INCREMENT untuk tabel `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `history_products`
+-- AUTO_INCREMENT untuk tabel `history_products`
 --
 ALTER TABLE `history_products`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT for table `migrations`
+-- AUTO_INCREMENT untuk tabel `migrations`
 --
 ALTER TABLE `migrations`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT for table `permissions`
+-- AUTO_INCREMENT untuk tabel `permissions`
 --
 ALTER TABLE `permissions`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `products`
+-- AUTO_INCREMENT untuk tabel `products`
 --
 ALTER TABLE `products`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `product_transation`
+-- AUTO_INCREMENT untuk tabel `product_transation`
 --
 ALTER TABLE `product_transation`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `roles`
+-- AUTO_INCREMENT untuk tabel `roles`
 --
 ALTER TABLE `roles`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT for table `users`
+-- AUTO_INCREMENT untuk tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
--- Constraints for dumped tables
+-- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
 
 --
--- Constraints for table `model_has_permissions`
+-- Ketidakleluasaan untuk tabel `model_has_permissions`
 --
 ALTER TABLE `model_has_permissions`
   ADD CONSTRAINT `model_has_permissions_permission_id_foreign` FOREIGN KEY (`permission_id`) REFERENCES `permissions` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `model_has_roles`
+-- Ketidakleluasaan untuk tabel `model_has_roles`
 --
 ALTER TABLE `model_has_roles`
   ADD CONSTRAINT `model_has_roles_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `role_has_permissions`
+-- Ketidakleluasaan untuk tabel `role_has_permissions`
 --
 ALTER TABLE `role_has_permissions`
   ADD CONSTRAINT `role_has_permissions_permission_id_foreign` FOREIGN KEY (`permission_id`) REFERENCES `permissions` (`id`) ON DELETE CASCADE,
